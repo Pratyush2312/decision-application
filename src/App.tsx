@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { Outlet } from "react-router";
+
 import { useDecision } from "./hooks/useDecision";
 import { useDecisionStore } from "./store/decisionStore";
 
@@ -6,7 +8,6 @@ function App() {
   const { data, isLoading, isError, error, refetch } = useDecision();
 
   const decision = useDecisionStore((state) => state.decision);
-
   const initializeDecision = useDecisionStore(
     (state) => state.initializeDecision,
   );
@@ -31,39 +32,11 @@ function App() {
     );
   }
 
-  if (!decision) return <p>Initializing decision...</p>;
+  if (!decision) {
+    return <p>Initializing decision...</p>;
+  }
 
-  return (
-    <main>
-      <h1>{decision.title}</h1>
-
-      <h2>Criteria</h2>
-
-      {decision.criteria.map((criterion) => (
-        <p key={criterion.id}>
-          {criterion.name} - Weight: {criterion.weight}
-        </p>
-      ))}
-
-      <h2>Options</h2>
-
-      {decision.options.map((option) => (
-        <div key={option.id}>
-          <h3>{option.name}</h3>
-
-          {Object.entries(option.ratings).map(([criterionId, rating]) => (
-            <p key={criterionId}>
-              {criterionId}: {rating}/5
-            </p>
-          ))}
-        </div>
-      ))}
-
-      <button onClick={() => useDecisionStore.getState().resetToOriginal()}>
-        Reset to Original
-      </button>
-    </main>
-  );
+  return <Outlet />;
 }
 
 export default App;
