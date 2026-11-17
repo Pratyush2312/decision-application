@@ -53,7 +53,6 @@ export const calculateScores = (
             weightedTotal,
         };
     });
-    console.log(results);
     results.sort((a, b) => b.weightedTotal - a.weightedTotal);
 
     let currentRank = 1;

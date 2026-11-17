@@ -4,7 +4,6 @@ import { Plus, Trash2, RotateCcw, ArrowRight } from "lucide-react";
 
 const DecisionBuilder = () => {
   const decision = useDecisionStore((state) => state.decision);
-  console.log(decision);
   const updateTitle = useDecisionStore((state) => state.updateTitle);
   const updateOptionName = useDecisionStore((state) => state.updateOptionName);
   const addOption = useDecisionStore((state) => state.addOption);
